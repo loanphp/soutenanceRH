@@ -1,0 +1,86 @@
+.file_view_container {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+    overflow-x:hidden;
+    overflow-y:auto; 
+}
+.file_view{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.file_view .button_container{
+    width: 200px;
+
+
+}
+/* #pdfContainer{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#pdfContainer div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+body {
+    position: relative;
+    height: 100vh;
+} */
+
+/* Styles for the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: absolute;
+    background-color: white;
+    width: 80%;
+    max-width: 800px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+
+/* Style for the PDF viewer */
+iframe#pdfViewer {
+    width: 100%;
+    height: 80vh;
+}
+
+#closeModalBtn{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+

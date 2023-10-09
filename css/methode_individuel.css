@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
+@import "/css/button.css";
+/* @import "/css/animation.css"; */
+*{
+  font-family: "Roboto",sans-serif;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+    background-color: #F2F3F5;
+}
+.grand_div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+}
+fieldset {
+    border-radius: 5px;
+    margin:0 20px ;
+}
+textarea {
+    height: 90px !important;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7137254902) !important;
+}
+legend{
+    background-color: #84E296;
+    padding: 10px;
+    border-radius: 5px;
+}
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 40px;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+textarea{
+    resize: none;
+}
+label {
+    font-weight: bold;
+}
+
+/* Styles pour les boutons */
+.btn-primary {
+    margin-top: 20px;
+}
+h1{
+    text-align: center;
+    justify-content: center;
+    box-shadow: none;
+    margin: 10px;
+}
+.btn{
+    border-radius: 5px;
+    height: 40px;
+    background-color: #84E296;
+    width: 100px;
+    border: none;
+    cursor: pointer;
+}
+.fieldset-container{
+    align-items: center;
+}

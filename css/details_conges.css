@@ -1,0 +1,62 @@
+/* Style général pour le tableau */
+
+/* Style pour les cellules de "valeur" */
+td#info_type_conges {
+  color: #00a000;
+  border-left: 3px solid #ccc; /* Ajouter une barre verticale */
+}
+
+h2{
+  text-align: center;
+  justify-content: center;
+
+}
+/* Style pour les lignes du tableau avec une barre horizontale en bas */
+tr {
+  border-bottom: 1px solid #ccc;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les titres "Champ" et "Valeur" */
+th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+/* Style alternatif pour les lignes de "questions" et "réponses" */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style pour les cellules */
+td {
+  padding: 8px;
+}
+
+/* Style pour les cellules de "champ" */
+td#code_employe_id {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+/* Style pour les cellules de "valeur" */
+td#info_type_conges {
+  color: #00a000;
+}
+
+/* Style pour le texte en gras dans les "questions" */
+tr.question td:first-child {
+  font-weight: bold;
+}

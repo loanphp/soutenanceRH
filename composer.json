@@ -1,0 +1,17 @@
+{
+    "name": "vendor/rh",
+    "type": "project",
+    "require": {
+        "aura/autoload": "2.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Rh\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "loanlendamba"
+        }
+    ]
+}

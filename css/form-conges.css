@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
+@import "/css/button.css";
+/* @import "/css/animation.css"; */
+*{
+  font-family: "Roboto",sans-serif;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+    background-color: #F2F3F5;
+}
+
+/* Style global du formulaire */
+.container-leave {
+    max-width: 700px; /* Définissez la largeur maximale souhaitée pour le formulaire */
+    margin: 20px auto; /* Centrez le formulaire horizontalement */
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+/* Styles pour les fieldsets */
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 530px;
+}
+legend{
+    background-color: #84E296;
+    padding: 10px;
+    border-radius: 5px;
+}
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 40px;
+}
+
+
+/* Styles spécifiques aux fieldsets */
+/* .fieldset1 {
+    width: 75%; /* Fieldset Infos personnelles occupe toute la largeur */
+
+/* .fieldset1 input{
+    width: 500px;
+    height: 20px;
+} */
+
+.fieldset2 {
+    display: flex;
+    flex-direction: column;
+}
+.line-div{
+    display:flex ;
+    width: 100%;
+    justify-content: space-between;
+}
+.duree{
+    width: 500px;
+    height: 20px;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+.formcenter{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+textarea{
+    resize: none;
+}
+
+.fieldset3 {
+    /* width: 75%; Fieldset Justificatif occupe toute la largeur */
+    /* height: 150px; */
+    justify-content: space-between;
+}
+
+/* .fieldset4 {
+    /* height: 170px; */
+    /* width: 75%;  */
+
+
+/* Styles pour les labels */
+label {
+    font-weight: bold;
+}
+
+/* Styles pour les boutons */
+.btn-primary {
+    margin-top: 20px;
+}
+h1{
+    text-align: center;
+    justify-content: center;
+    box-shadow: none;
+    margin: 10px;
+}
+.getbutton{
+    border-radius: 5px;
+    height: 40px;
+    background-color: #84E296;
+    width: 100px;
+    border: none;
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteRule ^$ index.php [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^[a-aA-Z0-9_/]*$ /src/rooter.php?url=$1 [NC,L]
+RewriteRule ^[0-9_/]*$ /src/rooter.php/?id=$1 [NC,L]
+
+# RewriteEngine On
+# RewriteBase /
+# RewriteRule ^$ index.php [NC]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^([^/]+)/([^/]+)$ /src/rooter.php?url=$1&e=$2 [QSA,NC,L]

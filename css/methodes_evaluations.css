@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
+
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+.buttonContainer-parent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  overflow: hidden;
+}
+
+.icone-btn {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 220px; /* Largeur des boutons */
+  text-align: center; /* Centrer le texte horizontalement */
+  font-size: 18px; /* Augmenter la taille de la police */
+  height: 220px;
+  transition: all 0.3s;
+  background-color: white;
+  text-decoration: none;
+  color: black;
+}
+.icone-btn svg{
+    width: 50px;
+    height: 50px;
+}
+.icone-btn span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column-reverse;
+}
+.icone-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column-reverse;
+
+}
+
+
+.icone-btn:hover {
+  background-color: #0056b3;
+  animation: translateY 0.3s;
+}
+.icone-btn:hover svg {
+    color: white;
+  }
+  .icone-btn:hover span {
+    color: white
+  }
+.div-methodes1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.div-methodes2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.code-employe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; 
+}
+.next-btn{
+  cursor: pointer;
+}
+
+.lab-methode {
+  order: 1;
+}
+
+.inp-methode {
+  order: 2; 
+  height: 30px;
+  width: 140px;
+  border-radius: 10px;
+}
+
+@keyframes translateY {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(10px);
+    }
+    
+}
+
