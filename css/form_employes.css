@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
 @import "/css/button.css";
 @import "/css/animation.css";
+@import "/css/scrollBar.css";
+@import"/css/side_bar.css";
+
 *{
   font-family: "Roboto",sans-serif;
   font-weight: 500;
@@ -13,7 +16,7 @@ body{
   align-items: center;
   overflow: hidden;
   position: relative;
-  height: 100vh;
+  height: 550vh;
   background-color:#F2F3F5;
 
 }
@@ -25,8 +28,9 @@ body{
   /* justify-content: center; */
   align-items: center;
   flex-direction: column;
-  padding: 0px 25px;
+  /* padding: 0px 25px; */
 }
+
 
 /* Style de la div principale */
 /* .container {
@@ -36,9 +40,12 @@ body{
 } */
 
 /* Style du titre */
-h1 {
+.h11 {
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
+  height: 30px;
+  margin: 15px;
 }
 
 /* Style des légendes des fieldsets */
@@ -48,7 +55,7 @@ legend {
 
 /* Style des fieldsets */
 fieldset {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   padding:10px;
   margin-bottom: 10px;
 }
@@ -199,36 +206,34 @@ button{
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 20px;
-  flex-direction: column;
+  /* padding: 20px;
+  flex-direction: column; */
 
-}
-
-h1 {
-  text-align: center;
-  height: 30px;
-  margin: 15px;
 }
 
 /* Style du champ de recherche */
 #search {
-  width: 100%;
-  padding: 10px;
+  /* width: 100%; */
+  /* padding: 10px; */
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: calc(100% - 280px);
 }
 
 /* Style du bouton "Ajouter Employé" */
 #addEmployee {
-  display: block;
+  display: flex;
   margin: 10px auto;
-  padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  height: 30px;
+}
+.fieldset1{
+  margin-top: 100px;
 }
 
 /* Style du tableau */
@@ -237,13 +242,12 @@ table {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   background-color: #FFF;
   border-radius: 3px;
-  width: 1600px;
 }
-.table-grand{
+/* .table-grand{
   width: 1200px;
   overflow-x: scroll;
   overflow-y: hidden;
-}
+} */
 .div-grand{
   margin: 40px;
   z-index: 3;
@@ -289,7 +293,7 @@ th h6{
   width: 100%;
   z-index: 2;
 }
-.button-container button{
+.button-container button,#show-action{
   margin-left:10px ;
   cursor: pointer;
   border-radius: 4px;
@@ -301,6 +305,13 @@ th h6{
 #delete-action{
   background-color:#dc3545;
 
+}
+#show-action{
+  background-color: #fd7e14;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .action-container svg {
   width :25px;
@@ -321,4 +332,89 @@ th h6{
 .slide-bottom {
 	-webkit-animation: slide-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: slide-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+ /* tableau css */
+
+ /* CSS pour le tableau */
+.table-grand {
+  min-width: 1000px !important;
+  /* width: 100%; */
+  background: #fff;
+  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29)!important;
+  text-align: center ;
+  overflow-x: scroll ;
+  overflow-y: auto ;
+  height: 600px ;
+}
+.photo-employe{
+  padding: 0px!important;
+  height: 100% ;
+}
+.search-tbn{
+  display: flex ;
+  justify-content: center ;
+  align-items: center;
+}
+.table-grand thead.thead-primary {
+  background: #6807f9 !important;
+}
+th{
+  background: #6807f9 !important;
+
+}
+
+.table-grand thead th {
+  border: none ;
+  padding: 30px ;
+  font-size: 14px ;
+  color: #fff ;
+}
+
+.table-grand tbody tr {
+  margin-bottom: 10px ;
+}
+
+.table-grand tbody th,
+.table-grand tbody td {
+  border: none ;
+  padding: 30px ;
+  font-size: 14px ;
+  background: #fff ;
+  vertical-align: middle ;
+  border-bottom: 2px solid #f8f9fd ;
+}
+
+.table-grand tbody th.scope {
+  background: #e8ebf8 ;
+  border-bottom: 2px solid #e0e5f6 ;
+}
+
+@media (min-width: 768px) {
+  .table-grand tbody td:nth-child(odd) {
+    background: #f4f6fc ;
+    border-bottom: 2px solid #eceffa ;
+  }
+}
+
+.photo-employe img {
+  max-width: 100px ;
+  max-height: 100px ;
+  object-fit: cover ;
+}
+.btn.btn-primary {
+  cursor: pointer ;
+  border-width: 2px ;
+  border-radius: 2px ;
+  font-size: 13px ;
+  font-weight: 500 ;
+  background: #6807f9 ;
+  border-color: #6807f9 ;
+  color: #fff ;
+  margin: 10px ;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus {
+  outline: none !important ;
+  box-shadow: 0px 12px 20px -6px rgba(0, 0, 0, 0.21) ;
 }

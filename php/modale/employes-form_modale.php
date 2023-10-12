@@ -1,27 +1,27 @@
-<div class="modal-container" aria-modal="false" tabindex="-1" role="dialog">
+<div class="modal-container y-scroll scroll" aria-modal="false" tabindex="-1" role="dialog">
 <div class="container mt-4 form-box">
         <div class="message_container"></div>
         <form method="post" enctype="multipart/form-data">
             <div id="fieldset-container">
                 <!-- Groupe d'informations personnelles -->
                 <div class="fieldset-container fieldset1">
-                    <h1>Formulaire de gestion des employés</h1>
+                    <h3 class="">Formulaire d'ajout d'employés</h3>
                     <fieldset>
                         <legend>Informations personnelles</legend>
                         <div class="form-row">
-                            <div class="form-group col-md-6 image-container">
+                            <div class="image-container">
                                 <input required type="file" class="form-control" id="photo" name="files">
                                 <!-- <label for="photo">Photo</label> -->
                                 <div class="big">
-                                    <div class="form-group col-md-6">
+                                    <div class=" ">
                                         <label for="nom_employe">Nom</label>
                                         <input required type="text" class="form-control" id="nom_employe" name="nom_employe">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class=" ">
                                         <label for="prenom_employe">Prénom</label>
                                         <input required type="text" class="form-control" id="prenom_employe" name="prenom_employe">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class=" ">
                                         <label for="date_de_naissance">Date de naissance</label>
                                         <input required type="date" class="form-control" id="date_de_naissance" name="date_de_naissance">
                                     </div>
@@ -35,12 +35,12 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class=" ">
                                 <label for="nationalite">Nationalité</label>
                                 <input required type="text" class="form-control" id="nationalite" name="nationalite">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label for="sexe">Sexe</label>
                             <select required class="form-control" id="sexe" name="sexe">
                                 <option value="M">Maxulin</option>
@@ -48,7 +48,7 @@
                                 <!-- <option value="autre">Autre</option> -->
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label for="numero_securite_sociale">Numéro de sécurité sociale</label>
                             <input type="text" class="form-control" id="numero_securite_sociale" name="numero_securite_sociale">
                         </div>
@@ -62,16 +62,16 @@
                     <fieldset>
                         <legend>Informations professionnelles</legend>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class=" ">
                                 <label for="date_embauche">Date d'embauche</label>
                                 <input required type="date" class="form-control" id="date_embauche" name="date_embauche">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class=" ">
                                 <label for="date_de_depart">Date de départ</label>
                                 <input required type="date" class="form-control" id="date_de_depart" name="date_de_depart">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label for="poste_occupe">Poste occupé</label>
                             <select required class="form-control" id="poste_occupe" name="poste_occupe">
                                 <?php foreach ($jobs as $job) : ?>
@@ -81,14 +81,14 @@
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="">
                             <label for="statut">Statut</label>
                             <select required class="form-control" id="statut" name="statut">
                                 <option value="cdd">Contrat à durée déterminé (CDD)</option>
                                 <option value="cdi">Contrat à durée indéterminé (CDI)</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label for="salaire">Salaire</label>
                             <input required type="number" class="form-control" id="salaire" name="salaire">
                         </div>
@@ -106,15 +106,15 @@
                 <h1>Formulaire de gestion des employés</h1>
                     <fieldset>
                         <legend>Coordonnées</legend>
-                        <div class="form-group">
+                        <div class="">
                             <label for="tel">Téléphone</label>
                             <input required type="tel" class="form-control" id="tel" name="tel">
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label for="adresse">Adresse</label>
                             <input required type="text" class="form-control" id="adresse" name="adresse">
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label for="email">Email</label>
                             <input required type="email" class="form-control" id="email" name="email">
                         </div>

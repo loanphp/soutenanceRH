@@ -52,7 +52,7 @@ function saveFile(){
                     }
                 }
                 formData.append(this);
-                new FetchRequest("request/dossier_du_personnel",formData,null,function(response){
+                new FetchRequest(ResolvePath("request/dossier_du_personnel"),formData,null,function(response){
                 });  
             }
         } 
@@ -67,7 +67,7 @@ function saveFile(){
                 formData.append("file_type", file_type.dataset.type);
                 formData.append("file_url", file_url);
 
-                let resquest = new FetchRequest("request/dossier_du_personnel",formData,null,function(response){
+                let resquest = new FetchRequest(ResolvePath("request/dossier_du_personnel"),formData,null,function(response){
                     if(response.success===true){
                         let tr = document.querySelector("tbody");
                     
@@ -155,4 +155,54 @@ function filePreview(data) {
     tbody.innerHTML = htmlString;
     return tbody.firstElementChild
 }
+function getEmployeFiles(){
+    let select = document.querySelector('#id_employe');
+    select.addEventListener('change', function(){
+        let numero_securite_sociale = select.value;
+        if(numero_securite_sociale && numero_securite_sociale!==""){
+            let formData = new FormData();
+            formData.append("numero_securite_sociale", numero_securite_sociale);
+            formData.append("formtype", "get");
+           new FetchRequest(ResolvePath("request/get/documents/employe"), formData, null, function(response){
+            if(response!==false && response!==true){
+                let dossiers = response.data;
+                getPDFFile(dossiers);
+                let file_url = null;
+                let file_name = null;
+                let file_type = null;
+                let files = null;
+                console.log(response.data);
+
+            }
+           })
+        
+
+        }
+    });
+
+}
+function getPDFFile(dossiers){
+    for (const dossier in dossiers) {
+        if (Object.hasOwnProperty.call(dossiers, dossier)) {
+            const filename = dossiers[dossier];
+            if(dossier!=="id" && dossier!=="numero_securite_sociale" && filename!==""){
+                fetch(`request/get/pdf?file=${filename}.pdf`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erreur de chargement du fichier');
+                        }
+                        return response.text();
+                    })
+                    .then(content => {
+                        console.log(content);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                });
+
+            }
+        }
+    }
+}
+getEmployeFiles();
 saveFile();

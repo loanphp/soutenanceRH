@@ -1,3 +1,4 @@
+@import "/css/scrollBar.css";
 table {
     width: 100%;
     border-collapse: collapse;
@@ -33,3 +34,46 @@ tr:hover {
 .reponse {
     color: green;
 }
+
+/* tableau css */
+
+/* CSS pour styliser le formulaire sans modifier son contenu */
+.form-container {
+    /* Ajoutez ici les styles que vous souhaitez appliquer au formulaire */
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  }
+  
+  .form-container h1 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .form-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .form-container th, .form-container td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #9d5739;
+  }
+  
+  .form-container th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .form-container tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .form-container a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  

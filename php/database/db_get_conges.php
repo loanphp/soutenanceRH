@@ -17,15 +17,23 @@ function response(string $message, bool $success = false, array $data = null) {
 }
 $fe = new FormException();
 $messages = $fe->emptyField([
-    "id" => "id",
     "form_type" => "type du formulaire"
 ]);
 if(count($messages)<=0){
     $formtype = strip_tags(trim($_POST['form_type']));
     if($formtype=="get"){
-        $id = strip_tags(trim($_POST['id']));
-        $leave = getLeaveBy("id",$id); 
-        echo response("",true, $leave);
+        $id = null;
+        if(isset($_POST["id"])){
+            $id = strip_tags(trim($_POST['id']));
+        }
+        if($id!==null && $id!==''){
+            $leave = getLeaveBy("id",$id); 
+            echo response("",true, $leave);
+        }
+        if($id===null || $id===""){
+            $leave = getAllConges();
+            echo response('',true,$leave->fetchAll(PDO::FETCH_ASSOC));
+        }
     }
 }
 else{

@@ -1,10 +1,42 @@
 /* Style général pour le tableau */
 
 /* Style pour les cellules de "valeur" */
+@import "/css/scrollBar.css";
 td#info_type_conges {
   color: #00a000;
   border-left: 3px solid #ccc; /* Ajouter une barre verticale */
 }
+.btn-primary.leave {
+  background-color: #007bff; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement intérieur du lien */
+  text-decoration: none; /* Supprimer la décoration du lien */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur de la souris en forme de main */
+  font-size: 16px; /* Taille de la police */
+  display: inline-block; /* Afficher en ligne pour ajuster la largeur au contenu */
+  margin-right: 10px; /* Marge à droite pour séparer les éléments */
+}
+
+.btn-primary.leave:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+#printButton {
+  background-color: #499ca7; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement intérieur du bouton */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur de la souris en forme de main */
+  font-size: 16px; /* Taille de la police */
+}
+
+#printButton:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
 
 h2{
   text-align: center;

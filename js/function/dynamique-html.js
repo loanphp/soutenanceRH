@@ -11,14 +11,6 @@ export function dynamiqueEmploye(data){
         <td><h6 data-texte ="nationalite">${data.nationalite}</h6></td>
         <td><h6 data-texte ="nationalite">${data.date_embauche}</h6></td>
         <td><h6 data-texte ="statu">${data.statut}</h6></td>
-        <td><h6 data-texte ="sexe">${data.sexe}</h6></td>
-        <td><h6 data-texte ="numero_securite_sociale">${data.numero_securite_sociale}</h6></td>
-        <td><h6 data-texte ="date_de_depart">${data.date_de_depart}</h6></td>
-        <td><h6 data-texte ="job">${data.job}</h6></td>
-        <td><h6 data-texte ="salaire">${data.salaire}</h6></td>
-        <td><h6 data-texte ="tel">${data.tel}</h6></td>
-        <td><h6 data-texte ="adresse">${data.adresse}</h6></td>
-        <td><h6 data-texte ="email">${data.email}</h6></td>
     </tr>`;
     tbody2.innerHTML = tdHtml;
     tbody.innerHTML = html;

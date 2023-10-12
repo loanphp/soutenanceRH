@@ -32,7 +32,7 @@ function addEmployes(){
                     formObject["numero_securite_sociale"] = response.data["numero_securite_sociale"];
                     let dynamiqueHtml = dynamiqueEmploye(formObject);
                     let tbody = document.querySelector("tbody");
-                    tbody.appendChild(dynamiqueHtml);
+                    tbody.insertBefore(dynamiqueHtml, tbody.firstElementChild);
                     form.reset();
                     let modaleparent = document.querySelector(".modal-container");
                     modaleparent.style.display = "none";

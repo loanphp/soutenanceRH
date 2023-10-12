@@ -23,6 +23,7 @@ export class ProgressForm {
   }
 
   run(params, styleOptions) {
+
     const fieldSets = params.form.querySelectorAll('fieldset');
     const progressElement = params.progress ? params.progress.progressElement : undefined;
     let nextIndex = 1;
@@ -33,7 +34,10 @@ export class ProgressForm {
       fieldSets.forEach((fieldSet, i) => {
         const nextButton = fieldSet.querySelector(".next-btn");
         const prevButton = fieldSet.querySelector('.prev-btn');
-        const translateX = params.translateX * nextIndex;
+        const translateX = params.translateX;
+        // const nextTranslateX = params.translateX * nextIndex;
+        console.log({lili:translateX * nextIndex});
+        let prevTranslateX = (translateX * nextIndex) + Math.abs(translateX * 2);
         fieldSetElement = fieldSet;
         fieldSet.classList.add(`fieldset${i}`);
 
@@ -45,14 +49,13 @@ export class ProgressForm {
           this.setFocusInFieldsest(fieldSetElement);
         }
 
-        this.next(nextButton, nextIndex, params.targetMarginWidth, translateX, progressElement);
+        this.next(nextButton, nextIndex, params.targetMarginWidth,translateX, progressElement);
         nextIndex++;
 
         if (i === 0) {
           getFocusableElements(fieldSetElement);
         }
-        console.log({prevIndex});
-        this.prev(prevButton, prevIndex, nextIndex, translateX, progressElement);
+        this.prev(prevButton, prevIndex, nextIndex, prevTranslateX, progressElement);
         prevIndex--;
       });
     }
@@ -84,10 +87,9 @@ export class ProgressForm {
           if (!translateX) {
             translateX = -625;
           }
-          console.log({fieldSetElement, translateX, calc:(translateX * nextIndex) - targetMarginWidth});
           anime({
             targets: targets,
-            translateX: translateX - targetMarginWidth,
+            translateX: (translateX * nextIndex) - targetMarginWidth,
             easing: 'easeInOutExpo',
           });
 
@@ -102,27 +104,20 @@ export class ProgressForm {
     }
   }
 
-  prev(prevButton, prevIndex, nextIndex, translateX, progressElement) {
-    console.log({translateX, prevIndex, nextIndex});
+  prev(prevButton, prevIndex, nextIndex, prevTranslateX, progressElement) {
     const targets = this.fieldsetTargetArray();
     if (prevButton) {
       prevButton.addEventListener("click", (e) => {
+        prevIndex--;
         e.preventDefault();
 
-        if (!translateX) {
-          translateX = -625;
-        }
-
-        (prevIndex === 2) ? translateX = 0 : translateX = translateX /= prevIndex;
-        console.log({prevIndex, translateX});
         fieldSetElement = document.querySelector(`.fieldset${prevIndex}`);
         this.setFocusInFieldsest(fieldSetElement);
         getFocusableElements(fieldSetElement);
-        console.log({prevIndex, nextIndex, translateX, fieldSetElement});
 
         anime({
           targets: targets,
-          translateX: translateX,
+          translateX: prevTranslateX,
           easing: 'easeInOutExpo',
         });
 
@@ -217,7 +212,7 @@ export class ProgressForm {
     };
 
     const defaultFieldsetStyle = {
-      width: '100%',
+      width: '385px',
       height: '100%',
       transition: 'margin-left 0.4s ease-in-out',
       backgroundColor: '#FFFFFF',
@@ -227,7 +222,7 @@ export class ProgressForm {
       flexDirection: 'column',
       padding: '30px',
       border: '1px solid #ccc',
-      // boxShadow: '0 0 5px rgba(255, 255, 255, 0.7137254902)',
+      boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)',
       borderRadius: '3px',
     };
     let  formStyle = null;
@@ -253,7 +248,8 @@ export class ProgressForm {
     });
 
     const fieldSetWidth = fieldSets[0].offsetLeft -10;
-    const fieldsetContainerWidth = this.fieldsetLength * fieldSetWidth + 60;
+    console.log(fieldSets[0].offsetLeft);
+    const fieldsetContainerWidth = this.fieldsetLength * fieldSetWidth - 57;
     params.fieldsetContainer.style.width = `${fieldsetContainerWidth}px`;
   }
 }

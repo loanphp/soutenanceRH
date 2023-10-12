@@ -8,6 +8,39 @@ body{
     width: 100vw;
     height: 100vh;
 }
+.perform{
+  position: relative;
+}
+.blue-btn{
+  position: absolute;
+  top: -50px;
+  right: -200px;
+  display: none!important;
+}
+.nav-link:hover{
+  background-color: #0d6efd;
+  
+}
+.grand{
+  height: 100vh;
+}
+.btn-button{
+  cursor: pointer;
+  margin: 0px;
+  padding: 10px 15px;
+  justify-content:flex-start!important;
+  display: flex;
+}
+.dropdown-item:hover{
+  background-color: #0d6efd;
+}
+.div-perform{
+  justify-content: flex-start!important;
+  display: flex;
+}
+.perform:hover .blue-btn{
+  display: flex!important;
+}
 main{
     height: 100%;
 }

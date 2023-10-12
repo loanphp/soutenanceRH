@@ -10,9 +10,14 @@ function getFoldersEmploye(string $dossier_personnel_id){
     return $result->fetch(PDO::FETCH_ASSOC);
 
 }
-function getAllEmployes(){
+function getAllEmployes(?array $orderBy=null){
     global $db;
     $query = "SELECT * FROM `gs_employes`";
+    if($orderBy!==null){
+        $sort = $orderBy['sort'];
+        $order = $orderBy['order']??"ASC";
+        $query = "SELECT * FROM `gs_employes` ORDER BY `$sort` $order";
+    }
     $result = $db->getFetchResult($query);
     return $result;
 }
@@ -85,6 +90,17 @@ function getLeaveBy(string $field ,string $value){
 
     return $leave;
 }
+function getAllConges(?array $orderBy=null){
+    global $db;
+    $query = "SELECT * FROM `conges`";
+    if($orderBy!==null){
+        $sort = $orderBy['sort'];
+        $order = $orderBy['order']??"ASC";
+        $query = "SELECT * FROM `conges` ORDER BY `$sort` $order";
+    }
+    $result = $db->getFetchResult($query);
+    return $result;
+}
 function getSessionUser(){
     $user = null;
     if(isset($_SESSION["sessionuser"]) && count($_SESSION["sessionuser"])>0){
@@ -122,6 +138,19 @@ function getEmployeBy(string $field ,string $value) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $user;
+}
+function getDossiersBy(string $field ,string $value){ 
+    global $db;
+    
+    $query = "SELECT * FROM `dossiers_du_personnels` WHERE `$field` = :$field";
+    $connect = $db->getConnection();
+    $stmt = $connect->prepare($query);
+    $stmt->bindParam(":$field", $value, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $dossier = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $dossier;
 }
 function getQuestionBy(string $field ,string $value) {
     global $db;

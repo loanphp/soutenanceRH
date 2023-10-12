@@ -1,0 +1,15 @@
+.y-scroll::-webkit-scrollbar,.fc-scroller::-webkit-scrollbar {
+    width: 10px;
+} 
+.scroll::-webkit-scrollbar-track,.fc-scroller::-webkit-scrollbar {
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px transparent;
+    position: relative;
+}
+.scroll::-webkit-scrollbar-thumb ,.fc-scroller::-webkit-scrollbar{
+    border-radius: 5px;
+    background-color: #444;    
+}
+.x-scroll::-webkit-scrollbar,.fc-scroller::-webkit-scrollbar {
+    height: 10px;
+} 

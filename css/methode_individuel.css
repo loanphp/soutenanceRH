@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 body {
-    background-color: #F2F3F5;
+    background-color:#344e41;
 }
 .grand_div{
     height: 100%;
@@ -21,7 +21,8 @@ body {
 }
 fieldset {
     border-radius: 5px;
-    margin:0 20px ;
+    margin:20px ;
+    justify-content : center;
 }
 textarea {
     height: 90px !important;
@@ -41,6 +42,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
   height: 40px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
 }
 .form-group{
     display: flex;
@@ -63,6 +65,7 @@ h1{
     justify-content: center;
     box-shadow: none;
     margin: 10px;
+    color: white;
 }
 .btn{
     border-radius: 5px;
@@ -73,5 +76,6 @@ h1{
     cursor: pointer;
 }
 .fieldset-container{
-    align-items: center;
+    /* align-items: center; */
+    padding-right: 10px;
 }

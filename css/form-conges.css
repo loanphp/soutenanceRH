@@ -8,8 +8,24 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* Styles CSS pour le calendrier */
+/* Vous pouvez personnaliser ces styles selon vos préférences */
+#calendar {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#demande-conge-form {
+    display: none;
+}
+
+.jour-ecoule {
+    text-decoration: line-through;
+    color: gray;
+}
+
 body {
-    background-color: #F2F3F5;
+    background-color: hwb(60 95% 4%);
 }
 
 /* Style global du formulaire */

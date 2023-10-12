@@ -1,0 +1,96 @@
+/* .p-3 {
+    padding: 1rem !important;
+}
+.flex-shrink-0 {
+    flex-shrink: 0 !important;
+}
+.flex-column {
+    flex-direction: column !important;
+}
+.d-flex {
+    display: flex !important;
+}
+.text-bg-dark {
+    color: #fff !important;
+    background-color: RGBA(var(--bs-dark-rgb), var(--bs-bg-opacity, 1)) !important;
+}
+.flex-nowrap {
+    flex-wrap: nowrap !important;
+}
+.d-flex {
+    display: flex !important;
+}
+
+main {
+    height: 100%;
+}
+.espace-restant{
+    width: calc(100% - 275px);
+    
+} */
+
+/* Style pour la classe "d-flex flex-column flex-shrink-0 p-3 text-bg-dark" */
+.d-flex.flex-column.flex-shrink-0.p-3.text-bg-dark {
+    width: 280px;
+}
+
+/* Style pour les liens à l'intérieur de la liste */
+.nav.nav-pills.flex-column.mb-auto .nav-link {
+    color: white;
+}
+
+/* Style pour les icônes SVG à l'intérieur des liens */
+.nav.nav-pills.flex-column.mb-auto .nav-link .bi {
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Style pour le lien avec la classe "perform" */
+.perform .nav-link {
+    color: white;
+}
+
+/* Style pour le bouton avec la classe "btn-button" */
+.perform .btn-button {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    gap: 4px;
+    margin: 0;
+}
+
+/* Style pour la liste déroulante */
+.blue-btn .dropdown-menu {
+    position: static;
+    display: grid;
+    gap: 1px;
+    padding: 2px;
+    border-radius: 3px;
+    width: 220px;
+    border: 0;
+    box-shadow: none;
+}
+
+/* Style pour les éléments de la liste déroulante */
+.blue-btn .dropdown-menu .dropdown-item {
+    border-radius: 2px;
+}
+
+/* Style pour l'image de l'avatar */
+/* .dropdown img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 2px;
+} */
+
+/* Style pour le texte du nom d'utilisateur */
+/* .dropdown strong {
+    font-weight: bold;
+} */
+
+/* Style pour les éléments de liste non liés à des classes CSS */
+/* Ajoutez ici les styles pour d'autres éléments non spécifiés dans les classes ci-dessus. */

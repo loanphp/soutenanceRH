@@ -14,7 +14,7 @@ $id = str_replace("id=","",$urlParts["query"]);
   <link rel="stylesheet" href="../../css/details_conges.css">
   <title>Details des evaluationResponse</title>
 </head>
-<body>
+<body class="y-scroll scroll">
   <div class="container mt-5">
   <button id="printButton">Imprimer le tableau</button>
   <a href="/evaluation/result" class="btn btn-primary leave">Resultats évaluation</a>

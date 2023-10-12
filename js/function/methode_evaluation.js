@@ -50,7 +50,7 @@ function init(){
                                 anime({
                                     targets:[".entretien-btn",".next-btn"], 
                                     translateX:-120, 
-                                    easing:"easeInOutExpo"
+                                    // easing:"easeInOutExpo"
                                 });
                             }
 

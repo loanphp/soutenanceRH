@@ -1,6 +1,11 @@
 <?php
 
 require_once "../php/functions/gs_employes.php";
+require_once "../php/functions/voteurs.php";
+if(!isset($_SESSION["sessionuser"])){
+    header("Location:/connection");
+}
+$isLogged = isLogged();
 $conges = getLeaveRequest();
 
 ?>
@@ -10,30 +15,21 @@ $conges = getLeaveRequest();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../../bootstrap-5.3.1-dist/bootstrap-5.3.1-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../../bootstrap-5.3.1-dist/bootstrap-5.3.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="../../css/view_conges.css">
+    <link rel="stylesheet" href="../../css/index.css">
     <title>Liste de demande de congés</title>
 </head>
 <body>
-    <div class="container">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark grand" style="width: 220px;">
+        <?php require_once("../php/partials/sidebar.php")?>
+    </div>
+    
+    <div class="container y-scroll scroll">
         <h1>Tableau de congés</h1>
         <div class="line-div">
-            <a href="/demande/conges" class="form_conges_btn">Demande de conges</a>
-            <div class="searchSelect">
-                <label for=""><h6 class="seah6">Type de recherche</h6></label>
-                <select name="" id="select-search">
-                    <option value="nom_employe">Nom</option>
-                    <option value="data_de_demande">data de demande</option>
-                    <option value="date_de_debut">date de debut</option>
-                    <option value="date_de_fin">date de fin</option>
-                    <option value="duree">durée</option>
-                    <option value="type_conges">type de conges</option>
-                    <option value="motif">motif</option>
-                    <option value="commentaire">commentaire</option>
-                    <option value="gestionnaire">gestionnaire</option>
-                </select>
-            </div>
+            <a href="/demande/conges" class="form_conges_btn">Demande de congé</a>
+            <a href="/calendrier/conges" class="form_conges_btn1 searchSelect">Calendrier de congés</a>
         </div>
         <div class="button-container" data-id = "-1"></div>
         <div class="first-div-container">

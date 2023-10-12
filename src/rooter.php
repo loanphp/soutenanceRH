@@ -4,6 +4,7 @@
 session_start();
 
 // require_once './resolver.php';
+$query = "";
 $url = $_SERVER['REQUEST_URI'];
 $urlParts = parse_url($url);
 $path = $urlParts['path'];
@@ -12,8 +13,11 @@ if(is_array($urlParts) && isset($urlParts["query"]) && $urlParts["query"]!==null
 }
 else{
     $urlquery = $url;
+
 }
-// var_dump($urlquery);
+if($urlParts && isset($urlParts["query"])){
+    $query = $urlParts["query"];
+}
 switch ($urlquery) {
     case '/employes':
         require '../php/employes/view_employes.php';
@@ -36,6 +40,12 @@ switch ($urlquery) {
     case '/connection':
         require '../php/login.php';
         break;
+    case '/essaie/evaluation':
+        require '../essaie/essaie_evaluation.php';
+        break;
+    case '/tableau/documents'."?".$query:
+        require '../table-02/tableau_documents.php';
+        break;
     case '/deconnection':
         require '../php/logout.php';
         break;
@@ -55,7 +65,7 @@ switch ($urlquery) {
         require '../php/database/db_delete.php';
         break;
     case '/request/dossier_du_personnel':
-        require '../php/databse/db_dossier_du_personnel.php';
+        require '../php/database/db_dossier_du_personnel.php';
         break;
     case '/request/get/conges':
         require '../php/database/db_get_conges.php';
@@ -78,6 +88,9 @@ switch ($urlquery) {
     case '/request/get/response/evaluation':
         require '../php/database/db_get_response_evaluation.php';
         break;
+    case '/request/get/documents/employe':
+        require '../php/database/db_getdocuments_employe.php';
+        break;
     case '/request/inscription':
         require '../php/database/signup-auth.php';
         break;
@@ -86,6 +99,9 @@ switch ($urlquery) {
         break;
     case '/evaluation/result':
         require '../php/employes/evaluation_result.php';
+        break;
+    case '/sidebar':
+        require '../php/partials/sidebar.php';
         break;
     case '/liste/conges':
         require '../php/employes/liste_demande_conges.php';
@@ -96,6 +112,18 @@ switch ($urlquery) {
     case '/methode/professionnel':
         require '../php/employes/professionel.php';
         break;
+    case '/details/employe'."?".$query:
+        require '../php/employes/details_employe.php';
+        break;
+    case '/request/get/pdf'.$query:
+        $fileContents = file_get_contents('/request/get/pdf' . $query);
+        if ($fileContents !== false) {
+            echo $fileContents;
+        } else {
+            echo "Impossible de lire le fichier.";
+        }
+        
+        break;
     case '/methode/auto_evaluation':
         require '../php/employes/auto_evaluation.php';
         break;
@@ -105,21 +133,30 @@ switch ($urlquery) {
     case '/demande/conges':
         require '../php/employes/gs_conges.php';
         break;
-    case '/methode/individuel'."?".$urlParts["query"]:
+    case '/calendrier/conges':
+        require '../php/employes/calendrier.php';
+        break;
+    case '/methode/individuel'."?".$query:
         require '../php/employes/individuel.php';
         break;
-    case '/details/evaluation'."?".$urlParts["query"]:
+    case '/details/evaluation'."?".$query:
         require '../php/employes/details_conges.php';
         break;
     case '/resquest/get/employe':
         require '../php/database/db-getEmploye.php';
         break;
-    case '/demande/conges'."?".$urlParts["query"]:
+    case '/demande/conges'."?".$query:
         require '../php/employes/gs_conges.php';
         break;
 
     default:
-        require './404.php';
+        $fileContents = file_get_contents('../upload/pdf/' . str_replace("?file=","",$query));
+        if ($fileContents !== false) {
+            echo $fileContents;
+        } else {
+            echo "Impossible de lire le fichier.";
+        }
+        // require './404.php';
         break;
 
 
