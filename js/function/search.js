@@ -1,21 +1,17 @@
-export function search(tableAttr,searchSelectAttr,searchTextTarget){
+export function search(tableAttr,search,searchTextTarget){
     document.addEventListener('DOMContentLoaded', function () {
-        const searchInput = document.getElementById('search');
         const table = document.getElementById(tableAttr);
         const rows = table.getElementsByTagName('tr');
-
-        searchInput.addEventListener('keyup', function () {
-            let search = document.querySelector(searchSelectAttr);
-            let searchValue = searchInput.value.toLowerCase();
-            let selectedIndex = search.selectedIndex;
-
-            let selectedOption = search.options[selectedIndex];
-            let searchType = selectedOption.value.toLowerCase();;
-
+        console.log(search);
+        search.addEventListener('input', function () {
+            let searchValue = search.value.toLowerCase();
             for (let i = 1; i < rows.length; i++) {
                 const row = rows[i];
-                const searchTexte = row.querySelector(`${searchTextTarget}[data-texte='${searchType}']`).textContent.toLowerCase(); // Nom
-                const shouldShow = searchTexte.includes(searchValue) ;
+                if(row.classList.contains("tr-primary")){
+                    row.remove();
+                }
+                const searchTexte = row.querySelector(searchTextTarget).textContent.toLowerCase(); // Nom
+                const shouldShow = searchTexte.includes(searchValue);
                 row.style.display = shouldShow ? '' : 'none';
             }
         });

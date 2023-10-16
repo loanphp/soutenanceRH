@@ -10,6 +10,7 @@ import { showEmployeAction } from "./module/employe-action.js";
 import { dynamiqueEmploye } from "./function/dynamique-html.js";
 import { formAutoFill } from "./function/utile.js";
 import { search } from "./function/search.js";
+import { Popup } from "./module/alert.js";
 function addEmployes(){
     let form = document.querySelector('form');
     if(form){
@@ -18,24 +19,37 @@ function addEmployes(){
             let formtype = form.dataset.formType;
             if(formtype === "add"){
                 let formdata = new FormData(form);
+                formdata.append('form_type',formtype);
                 let formObject = {};
-                let fetchRequest = new FetchRequest(ResolvePath("request/employes"), formdata, null, function(response){
-                    fetchRequest.getResponse(response)
+                new FetchRequest(ResolvePath("request/employes"), formdata, null, function(response){
                     scrollBarInit(document.body);
-                    formdata.forEach((value,key) => {
-                        formObject[key] = value;
-                    });
-                    formObject["id"] = response.data["id"];
-                    formObject["files"] = response.data["photo"];
-                    formObject["poste_occupe"] = response.data["poste_occupe"];
-                    formObject["job"] = response.data["job"]["name"];
-                    formObject["numero_securite_sociale"] = response.data["numero_securite_sociale"];
-                    let dynamiqueHtml = dynamiqueEmploye(formObject);
-                    let tbody = document.querySelector("tbody");
-                    tbody.insertBefore(dynamiqueHtml, tbody.firstElementChild);
-                    form.reset();
-                    let modaleparent = document.querySelector(".modal-container");
-                    modaleparent.style.display = "none";
+                    if(true === response.success){
+                        formdata.forEach((value,key) => {
+                            formObject[key] = value;
+                        });
+                        formObject["id"] = response.data["id"];
+                        formObject["files"] = response.data["photo"];
+                        formObject["poste_occupe"] = response.data["poste_occupe"];
+                        formObject["job"] = response.data["job"]["name"];
+                        formObject["numero_securite_sociale"] = response.data["numero_securite_sociale"];
+                        let dynamiqueHtml = dynamiqueEmploye(formObject);
+                        let tbody = document.querySelector("tbody");
+                        let parentCheckbox = document.querySelector(".disabled");
+                        let emptyMessage = document.querySelector(".empty-message");
+                        tbody.insertBefore(dynamiqueHtml, tbody.firstElementChild);
+                        form.reset();
+                        let modaleparent = document.querySelector(".modal-container");
+                        modaleparent.style.display = "none";
+                        if(parentCheckbox){
+                            parentCheckbox.classList.remove('disabled');
+                            parentCheckbox.removeAttribute('disabled');
+                        }
+                        if(emptyMessage){emptyMessage.remove()}
+                        return handleRequestMessage({title:'Succès !',message:response.message,type:'success'});
+                    }
+                    if(false === response.success){
+                        return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
+                    }
                 });
             }
             if(formtype=="edite"){
@@ -43,9 +57,10 @@ function addEmployes(){
                 let id = butoncontainer.dataset.id;
                 let formdata = new FormData(form);
                 formdata.append("formtype", "edite");
-                formdata.append("id", id)
+                formdata.append("id", id);
+                formdata.append('form_type',formtype);
                 new FetchRequest(ResolvePath("resquest/get/employe"),formdata, null, function(response){
-                    if(response.success){
+                    if(true === response.success){
                         let Modalcontainer = document.querySelector(".modal-container");
                         Modalcontainer.style.display = "none";
                         let datas = response.data;
@@ -58,10 +73,13 @@ function addEmployes(){
                             }
                             if(key=="photo"){
                                 img.src = value;
-                            }
-                            
+                            } 
                         };
-                    } 
+                        return handleRequestMessage({title:'Succès !',message:response.message,type:'success'});
+                    }
+                    if(false === response.success){
+                        return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
+                    }
                 });
                 
             }
@@ -109,7 +127,8 @@ function showModal(){
         });
     }
 }
-search('employeeTable',"#select-search","h6");
+let searchs = document.querySelector("#search");
+search('employeeTable',searchs,"h6");
 
 export function deleteEmployes(){
     let button = document.querySelector('#delete-action');
@@ -148,6 +167,11 @@ export function deleteEmployes(){
         
     }
 
+}
+function handleRequestMessage(data={title,message,type}){
+    const modal = new Popup();
+    modal.display({title:data.title, type:data.type, message:data.message})
+    modal.handleAudio(5000, {set:true, path:'public/popupsing.wav', volume:0.7});
 }
 addEmployes();
 showModal();

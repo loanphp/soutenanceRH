@@ -1,7 +1,7 @@
 <?php
 require_once "../php/functions/gs_employes.php";
 $id = str_replace("id=", "", $urlParts["query"]);
-$dossiers = getDossiersBy("id", $id);
+$dossiers = getDossiersBy("numero_securite_sociale", $id);
 ?>
 
 
@@ -12,6 +12,7 @@ $dossiers = getDossiersBy("id", $id);
 	<title>Table 02</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="../../bootstrap-5.3.1-dist/bootstrap-5.3.1-dist/css/bootstrap.css">
 
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 
@@ -42,18 +43,27 @@ $dossiers = getDossiersBy("id", $id);
 								</tr>
 							</thead>
 							<tbody>
+								<?php $id = 0?>
 								<?php foreach ($dossiers as $key => $value) : ?>
+						
 									<?php if ($value !== "" && $value !== null) : ?>
 										<tr class="alert" role="alert">
+											
 											<?php if ($key !== "id") : ?>
+												<?php if ($key === "numero_securite_sociale") : ?>
+													<?php $numero_securite_sociale = $value?>
+												<?php endif; ?>
 												<th scope="row"><?= ucfirst(str_replace("_"," ",$key)) ?></th>
-												<td><?= $value ?></td>
 												<?php if ($key !== "numero_securite_sociale") : ?>
-													<td>
-														<a data-id=<?= $key ?> href="#" class="close" data-dismiss="alert" aria-label="Close">
-															<span aria-hidden="true"><i class="fa fa-close"></i></span>
-														</a>
+													<td data-td-id="<?= $id?>"><?= $value ?></td>
+													<td class="buttons">
+														<button data-id="<?= isset($id)?$id:""?>" data-numero="<?= isset($numero_securite_sociale)?$numero_securite_sociale:""?>" data-colonne= "<?= $key?>" class="close remove">
+															<span aria-hidden="true" class="cose_span" ><i class="fa fa-close"></i></span>
+														</button>
+														<a href="../upload/pdf/<?=$key!=="numero_securite_sociale" && $key!=="id"?$value:"" ?>"><svg class="download_svg" download><use xlink:href="../public/svg/alert.svg#download"></use></svg></a>
 													</td>
+												<?php else: ?>
+													<td><?= $value ?></td>
 												<?php endif; ?>
 											<?php endif; ?>
 										</tr>
@@ -65,6 +75,7 @@ $dossiers = getDossiersBy("id", $id);
 											<?php endif; ?>
 										</tr>
 									<?php endif; ?>
+									<?php $id++?>
 								<?php endforeach; ?>
 							</tbody>
 						</table>
@@ -73,11 +84,12 @@ $dossiers = getDossiersBy("id", $id);
 			</div>
 		</div>
 	</section>
-
+<!-- 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="./js/main.js"></script> -->
+ <script src="../../js/tableau_document.js" type="module"></script>
 
 </body>
 

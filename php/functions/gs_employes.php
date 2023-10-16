@@ -112,14 +112,11 @@ function getSessionUser(){
 function getUser(string $email) {
     global $db;
     
-    // Utilisation d'une requête préparée pour éviter l'injection SQL
     $query = "SELECT * FROM `users` WHERE `email` = :email";
     $connect = $db->getConnection();
     $stmt = $connect->prepare($query);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
-
-    // Récupérer les données de l'utilisateur sous forme d'un tableau associatif
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $user;

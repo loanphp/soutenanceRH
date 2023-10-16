@@ -26,6 +26,7 @@ if(count($messages)<=0){
         $id = strip_tags(trim($_POST['id']));
         $Employe = getEmployeBy("id",$id); 
         echo response("",true, $Employe);
+        die;
     }
     if($formtype=="edite"){
         $messages = $fe->emptyField([
@@ -43,6 +44,7 @@ if(count($messages)<=0){
             "tel" => "numéro téléphone",
             "adresse"=> "adresse",
             "email" => "email",
+            "numero_securite_sociale" => "numéro d'itendification sociale"
         ]);
         if(count($messages)<=0){
             $photo = upload_file("files", "../upload/images", $uniquekey);
@@ -60,11 +62,12 @@ if(count($messages)<=0){
             $adresse = strip_tags(trim($_POST["adresse"]))	;	
             $email	= strip_tags(trim($_POST["email"]))	;
             $users = getUser($email);
-            $id = strip_tags(trim($_POST["id"]));
+            $numero_securite_sociale = strip_tags(trim($_POST["numero_securite_sociale"]))	;
+            $id = strip_tags(trim($_POST["id"]));   
             $update = "UPDATE `gs_employes` SET `photo` = :photo, `nom_employe` = :nom_employe, `prenom_employe` = :prenom_employe,
             `date_de_naissance` = :date_de_naissance, `nationalite` = :nationalite, `date_embauche` = :date_embauche, `statut` = :statut,
            `sexe` = :sexe, `date_de_depart` = :date_de_depart, `poste_occupe` = :poste_occupe, `salaire` = :salaire,
-           `tel` = :tel, `adresse` = :adresse, `email` = :email WHERE `id` = :id";
+           `tel` = :tel, `adresse` = :adresse, `email` = :email, `numero_securite_sociale` = :numero_securite_sociale WHERE `id` = :id";
 
             $result = $db->getSelect($update, [
             "id" => $id,
@@ -82,16 +85,19 @@ if(count($messages)<=0){
             "tel" => $tel,
             "adresse" => $adresse,
             "email" => $email,
+            "numero_securite_sociale" => $numero_securite_sociale
             ]);
             $Employe = getEmployeBy("id",$id); 
             echo response("L'employé a été mit a jour.", true, $Employe);
-        }
-        else{
+            die;
+        }else{
             echo response($fe->getError($messages));
+            die;
         }
     }
 }
 else{
     echo response($fe->getError($messages));
+    die;
 }
 ?>

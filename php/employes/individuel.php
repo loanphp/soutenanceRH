@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once "../php/functions/gs_employes.php";
 $getAllEvaluationQuestions =  getAllEvaluationQuestions();
 
@@ -56,4 +56,4 @@ $getAllEvaluationQuestions =  getAllEvaluationQuestions();
     <script src="../../js/function/individuel.js" type="module"></script>
 </body>
 
-</html>
+</html> -->

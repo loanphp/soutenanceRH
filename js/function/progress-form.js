@@ -1,5 +1,6 @@
 import anime from '../../anime-master/anime-master/lib/anime.es.js';
 import { focusInBlock, getFocusableElements } from "../../js/function/focus-in-block.js";
+import { Popup } from '../module/alert.js';
 
 let fieldSets = document.querySelectorAll(".fieldset-container");
 let params = {form:document.querySelector('form'),fieldsetContainer:document.querySelector("#fieldset-container")};
@@ -34,9 +35,8 @@ class StageOne{
                     targets: pages,
                     translateX: -575,
                     easing: 'easeInOutExpo'
-            });
-
-            }
+                });
+            }else{setMessage()}
         });
     }
 }
@@ -61,7 +61,7 @@ class StageTwo{
                         easing: 'easeInOutExpo'
                     });
                 }
-            }
+            }else{setMessage()}
         });
     }
     prev(){
@@ -88,6 +88,7 @@ class StageThree{
             let currentFieldset = document.querySelector('.fieldset3');
             let isvalid = isValidFieldset(currentFieldset);
            if(isvalid=false){
+            setMessage();
             e.preventDefault();
            }
         });
@@ -193,3 +194,13 @@ export function closeModal(openbutton){
     
 }
 
+function setMessage(){
+    const modalinfo = {
+      title: 'Erreur !',
+      type: 'danger',
+      message: "Veuillez completer tous les champs."
+    }
+    const modal = new Popup();
+    modal.display({title:modalinfo.title, type:modalinfo.type, message:modalinfo.message})
+    modal.handleAudio(5000, {set:true, path:'public/popupsing.wav', volume:0.7});
+  }

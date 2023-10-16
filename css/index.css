@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
+@import "./modal.css";
 
 *{
   font-family: "Roboto",sans-serif;
@@ -13,9 +14,9 @@ body{
 }
 .blue-btn{
   position: absolute;
-  top: -50px;
-  right: -200px;
-  display: none!important;
+  top: -70px;
+  right: -250px;
+  display: none !important;
 }
 .nav-link:hover{
   background-color: #0d6efd;
@@ -39,7 +40,7 @@ body{
   display: flex;
 }
 .perform:hover .blue-btn{
-  display: flex!important;
+  display: flex !important;
 }
 main{
     height: 100%;
@@ -189,6 +190,14 @@ main{
   width: 100%;
   height: 100%;
   justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.nav li{
+  margin-bottom: 15px;
+}
+.perform-text-contain{
   display: flex;
   align-items: center;
 }

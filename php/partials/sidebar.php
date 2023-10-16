@@ -22,7 +22,7 @@
   </symbol>
 </svg>
 </div>
-<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none side-bar">
         <div class="inverses">
             <h1 class="inverse">L</h1>
             <h1>L</h1>
@@ -31,31 +31,31 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link" aria-current="page">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-            Acceuil
-            </a>
-        </li>
+          <li class="nav-item">
+              <a href="/" class="nav-link text-white <?= $active_hover === "active_home" ? "active" : ""?>" aria-current="page">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+              Acceuil
+              </a>
+          </li>
             <li>
-                <a href="/ajouter/employes" class="nav-link text-white">
+                <a href="/ajouter/employes" class="nav-link text-white <?= $active_hover === "active_employee" ? "active" : ""?>">
                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people"/></svg>
                 Employés
                 </a>
             </li>
             <li>
-                <a href="/liste/conges" class="nav-link text-white">
+                <a href="/liste/conges" class="nav-link text-white <?= $active_hover === "active_leave" ? "active" : ""?>">
                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                 Congés
                 </a>
             </li>
             <li class="perform">
-                <div class="nav-link text-white btn-button">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                    <div class="div-perform">Evaluations des performances</div>
+                <div class="nav-link text-white btn-button perform-text-contain">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                    <div class="div-perform">Evaluations</div>
                 </div>
                 <ul>
-                    <div class="blue-btn d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+                    <div class="blue-btn d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center <?= $active_hover ? $active_hover : ""?>">
                         <ul class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 border-0 shadow w-220px" data-bs-theme="dark">
                             <li><a class="dropdown-item rounded-2 " href="/methodes/evaluations">Evaluations des performances</a></li>
                             <li><a class="dropdown-item rounded-2 " href="/evaluation/result">Resultat Evaluation</a></li>
@@ -65,9 +65,9 @@
                 </ul>
             </li>
             <li>
-                <a href="/dossier_du_personnel" class="nav-link text-white">
+                <a href="/dossier_du_personnel" class="nav-link text-white <?= $active_hover === "active_folder" ? "active" : ""?>">
                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#imployee-folder"/></svg>
-                Dossiers du personnel
+                Dossiers
                 </a>
             </li>
         </ul>

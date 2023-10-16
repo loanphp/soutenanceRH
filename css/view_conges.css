@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300;1,400;1,500&display=swap');
 /* @import "/css/button.css"; */
 @import "/css/scrollBar.css";
+@import "./modal.css";
 h1{
   text-align: center;
 }
@@ -37,16 +38,16 @@ tbody td{
     align-items: center;
     border-radius: 3px;
     background-color: #84E296;
+    margin-right: 10px;
 }
 .container{
-    /* height: 100%; */
     padding: 15px;
     background-color: white;
-    height: 100%;
-    max-height: 550px;
+    height: 500px;
     margin: 20px;
     overflow-x: hidden;
     overflow-y: auto;
+    border-radius: 3px;
 
 }
 /* Styles pour le tableau */
@@ -61,10 +62,10 @@ table.table {
   /* Styles pour les en-têtes de colonne */
   table.table th {
     background-color: hsl(306, 69%, 43%);
-    text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
   }
+
   
   /* Styles pour les lignes de données */
   table.table td {
@@ -155,6 +156,7 @@ table.table {
   width: 30%;
   justify-content: space-between;
   align-items: center;
+  margin-bottom:20px ;
 }
 .seah6{
   display: flex;
@@ -235,4 +237,17 @@ table.table {
 .btn.btn-primary:focus {
   outline: none !important;
   box-shadow: 0px 12px 20px -6px rgba(0, 123, 255, 0.5);
+}
+
+.form_conges_btn1 {
+  background-color: #212529;
+  color: #FFFFFF;
+  border-radius: 3px;
+  text-decoration: none;
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }

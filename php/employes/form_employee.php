@@ -36,7 +36,11 @@ $employes = getAllEmployes(["sort"=>"date_embauche"]);
                     <thead class="thead-primary">
                         <tr class="tr-primary">
                             <th>
-                                <input class="parent-checkbox" id="c1" type="checkbox">
+                                <?php if ($employes->rowCount() > 0): ?>
+                                    <input class="parent-checkbox" id="c1" type="checkbox">
+                                <?php else: ?>
+                                    <input class="parent-checkbox disabled" id="c1" type="checkbox" disabled>
+                                <?php endif; ?>
                             </th>
                             <th><h6>Photo</h6></th>
                             <th><h6>Nom</h6></th>
@@ -51,7 +55,7 @@ $employes = getAllEmployes(["sort"=>"date_embauche"]);
                         <?php while ($allemployes = $employes->fetch(PDO::FETCH_ASSOC)): ?>
                             <?php $job = getJobBy("id",$allemployes["poste_occupe"])?>
                             <tr data-id="<?= $allemployes["id"]?>">
-                                <td><input data-id="<?= $allemployes["id"]?>" class="child-checkbox" type="checkbox" name="" id=""></td>
+                                 <td><input data-id="<?= $allemployes["id"]?>" class="child-checkbox" type="checkbox" name="" id=""></td>
                                 <td class="photo-employe"><img src="<?= $allemployes["photo"]?>" alt="Photo"></td>
                                 <td><h6 data-texte="nom_employe"><?=$allemployes["nom_employe"]?></h6></td>
                                 <td><h6 data-texte="prenom_employe"><?=$allemployes["prenom_employe"]?></h6></td>
@@ -59,20 +63,20 @@ $employes = getAllEmployes(["sort"=>"date_embauche"]);
                                 <td><h6 data-texte="nationalite"><?=$allemployes["nationalite"]?></h6></td>
                                 <td><h6 data-texte="date_embauche"><?=$allemployes["date_embauche"]?></h6></td>
                                 <td><h6 data-texte="statut"><?=$allemployes["statut"]?></h6></td>
-                                
                             </tr>
                         <?php endwhile; ?>
+                        <?php if ($employes->rowCount() == 0): ?>
+                            <tr class="empty-message">
+                                <td colspan="8"><h1 style="color:#555;">Aucun employé n'a été ajouté.</h1></td>
+                            </tr>
+                        <?php endif; ?> 
                     </tbody>
-
                 </table>
             </div>
         </div>
     </div>
     <?php require_once "../php/modale/employes-form_modale.php"?>
     <script src="../../js/gs_employes.js" type="module"></script>
-
-    <!-- Bootstrap JS scripts (jQuery and Popper.js required) -->
-    <!-- <script src="../../bootstrap-5.3.1-dist/bootstrap-5.3.1-dist/js/bootstrap.bundle.js"></script> -->
 </body>
 
 </html>

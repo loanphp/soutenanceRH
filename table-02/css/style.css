@@ -1,9 +1,28 @@
+@import "../../css/modal.css";
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ .download_svg{
+  width: 20px!important;
+  height: 20px!important;
+  color: #28a745 !important;
+  justify-content: center!important;
+  align-items: center! important;
+  display: flex !important;
+ }
+ .remove{
+  width: 10px;
+  height: 12px;
+  background-color:transparent;
+  border: none;
+  outline: none !important;
+ }
+.remove i{
+	color:red;
+ }
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -4233,7 +4252,18 @@ input[type="button"].btn-block {
     top: 0;
     right: 0;
     padding: 0.75rem 1.25rem;
-    color: inherit; }
+    color: inherit; 
+  }
+  .close{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .clsoe_span{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
 
 .alert-primary {
   color: #004085;

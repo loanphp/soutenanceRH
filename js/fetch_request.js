@@ -1,3 +1,4 @@
+
 export class FetchRequest{
     constructor(uri, data, redirectUrl=null,  postFetchAction=(response)=>{},submiter, preFetchAction=async()=>{}, method = "POST") {
         this.data = data;

@@ -12,6 +12,7 @@ $id = str_replace("id=","",$urlParts["query"]);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../css/details_conges.css">
+  <link rel="stylesheet" href="../../bootstrap-5.3.1-dist/bootstrap-5.3.1-dist/css/bootstrap.css">
   <title>Details des evaluationResponse</title>
 </head>
 <body class="y-scroll scroll">

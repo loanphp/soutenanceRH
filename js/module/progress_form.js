@@ -1,6 +1,7 @@
 import anime from '../../anime-master/anime-master/lib/anime.es.js';
 import { focusInBlock, getFocusableElements } from "../function/focus-in-block.js";
 import { ProgressFormStyleOptions } from '../interface/ProgressFormStyleOptions.js';
+import { Popup } from './alert.js';
 
 let fieldSetElement = null;
 
@@ -36,7 +37,6 @@ export class ProgressForm {
         const prevButton = fieldSet.querySelector('.prev-btn');
         const translateX = params.translateX;
         // const nextTranslateX = params.translateX * nextIndex;
-        console.log({lili:translateX * nextIndex});
         let prevTranslateX = (translateX * nextIndex) + Math.abs(translateX * 2);
         fieldSetElement = fieldSet;
         fieldSet.classList.add(`fieldset${i}`);
@@ -151,6 +151,7 @@ export class ProgressForm {
     for (const input of inputs) {
       if (!input.checkValidity()) {
         input.reportValidity();
+        this.setMessage()
         return false;
       }
     }
@@ -158,6 +159,7 @@ export class ProgressForm {
     for (const select of selects) {
       if (!select.checkValidity()) {
         select.reportValidity();
+         this.setMessage()
         return false;
       }
     }
@@ -165,13 +167,23 @@ export class ProgressForm {
     for (const textarea of textareas) {
       if (!textarea.checkValidity()) {
         textarea.reportValidity();
+         this.setMessage()
         return false;
       }
     }
 
     return true;
   }
-
+  setMessage(){
+    const modalinfo = {
+      title: 'Erreur !',
+      type: 'danger',
+      message: "Veuillez completer tous les champs."
+    }
+    const modal = new Popup();
+    modal.display(modalinfo.title, modalinfo.type, modalinfo.message)
+    modal.handleAudio(30000, {set:true, path:'public/popupsing.wav', volume:0.7});
+  }
   fieldsetTargetArray() {
     let fieldsetTargetArray = [];
 

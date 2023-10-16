@@ -23,6 +23,33 @@ export function scrollBarInit(element) {
         }
     })
   }
+
+  export function convertBase64FileToFile(base64String, mimeType)
+  {
+    let byteCharacters = atob(base64String);
+    let byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }let byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
+  }
+
+
+export function forbiddener(target="div"){
+    const forbiddenParent = document.createElement(target);
+    const spinner = document.createElement('div');
+    spinner.classList.add('spinner') ;
+    forbiddenParent.classList.add('forbidden-parent');
+    forbiddenParent.appendChild(spinner);
+    return forbiddenParent;
+}
+export function shortenedText(text, maxLength = 14) {
+    text = text.trim();
+    if (text.length > maxLength) {
+      return `${text.substring(0, maxLength)}...`;
+    }
+    return text;
+}
   
 
   

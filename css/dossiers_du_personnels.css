@@ -1,3 +1,6 @@
+@import "./modal.css";
+@import "./spinner.css";
+
 .file_view_container {
     width: 100%;
     height: 200px;
@@ -11,6 +14,11 @@
     display: flex;
     align-items: center;
     margin: 10px;
+}
+.dossier_employe.disabled{
+   cursor:not-allowed!important;
+   background-color: rgba(1, 1, 1, 0.5)!important;
+   border-color: rgba(1, 1, 1, 0.5)!important;
 }
 .file_view .button_container{
     width: 200px;
@@ -30,11 +38,12 @@
     justify-content: center;
     align-items: center;
 
-}
+} */
 body {
     position: relative;
     height: 100vh;
-} */
+    display: flex;
+}
 
 /* Styles for the modal */
 .modal {
@@ -80,7 +89,36 @@ iframe#pdfViewer {
     justify-content: center;
 }
 
+form{
+    width: 100%;
+}
+.container-parent{
+    display: flex;
+}
+.form-group, .file_view_container{
+    margin: 10px 0;
+    position: relative;
+}
+.container, .page-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-
-
-
+.table{
+    height: 100%;
+}
+.tbody{
+    position: relative;
+}
+.forbidden-parent{
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+}

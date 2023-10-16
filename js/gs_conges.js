@@ -1,8 +1,9 @@
-import { FetchRequest } from "./fetch_request.js";
+import { FetchRequest} from "./fetch_request.js";
 import { scrollBarInit } from "../js/function/utile.js";
 import { ResolvePath } from "./function/resolver.js";
 import { formAutoFill } from "../js/function/utile.js";
 import { search } from "./function/search.js";
+import { Popup } from "./module/alert.js";
 function leaveAsking(){
     let form = document.querySelector('form');
     const params = new URLSearchParams(window.location.search);
@@ -20,8 +21,13 @@ function leaveAsking(){
                 formdata.append("form_type","update");
                 formdata.append("id",id);
             }
-            let fetchRequest = new FetchRequest(ResolvePath("request/conges"), formdata, ResolvePath("liste/conges"), function(response){
-                fetchRequest.getResponse(response)
+            new FetchRequest(ResolvePath("request/conges"), formdata, ResolvePath("liste/conges"), function(response){
+                if(false === response.success){
+                    return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
+                }
+                if(true === response.success){
+                    return handleRequestMessage({title:'Succès !',message:response.message,type:'success'});
+                }
                 scrollBarInit(document.body);
             });
     
@@ -36,8 +42,11 @@ function getLeave(){
         formdata.append("id", id);
         formdata.append("form_type","get");
         new FetchRequest(ResolvePath("request/get/conges"), formdata, null,function(response){
-            if(response.success){
+            if(true === response.success){
                 formAutoFill(response.data, "input,select,textarea",);
+            }
+            if(false === response.success){
+                return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
             }
         });
     }
@@ -48,7 +57,6 @@ function deleteLeave(){
     if (leavebuttons) {
         leavebuttons.forEach(leavebutton => {
             let id = leavebutton.dataset.delete
-            console.log(id);
             if (id) {
                 leavebutton.addEventListener('click', function (e) {
                     let formdata = new FormData();
@@ -56,9 +64,12 @@ function deleteLeave(){
                     let resultat = confirm("Voulez-vous vraiment supprimer cette demande ?");
                     if (resultat === true) {
                         new FetchRequest(ResolvePath("request/delete/conges"), formdata, null, function (response) {
-                            if(response.success){
+                            if(true === response.success){
                                 let tr = document.querySelector(`.leave${id}`);
                                 tr.remove();
+                            }
+                            if(false === response.success){
+                                return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
                             }
         
                         })
@@ -138,14 +149,23 @@ function changeStatus(){
             let formdata = new FormData()
             formdata.append("status"+id,value)
             formdata.append("id",id)
-            new FetchRequest("request/conges/status", formdata,null,function(response){},input,false)
+            new FetchRequest("request/conges/status", formdata,null,function(response){
+                if(false === response.success){
+                    return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
+                }
+            },input,false)
             
         });
     }
 }
-// getLeave();
+function handleRequestMessage(data={title,message,type}){
+    const modal = new Popup();
+    modal.display({title:data.title, type:data.type, message:data.message})
+    modal.handleAudio(30000, {set:true, path:'public/popupsing.wav', volume:0.7});
+}
 deleteLeave();
 changeStatus();
 findDate();
 leaveAsking();
-search("table-leave","#select-search","td");
+let searchs = document.querySelector("#search");
+search("table-leave",searchs,"td");

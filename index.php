@@ -15,6 +15,7 @@ $leavePath = "./php/employes/details_conges.php";
 if($canManageLeave){
     $leavePath = "/evaluation_de_performances";
 }
+$active_hover = "active_home";
 ?>
 <!DOCTYPE html>
 <html lang="en">

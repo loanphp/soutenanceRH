@@ -19,6 +19,19 @@ if($urlParts && isset($urlParts["query"])){
     $query = $urlParts["query"];
 }
 switch ($urlquery) {
+    case '/':
+        $active_hover = "active_home";
+        require '../index.php';
+        break;
+    case '/inscription':
+        require '../php/signup.php';
+        break;
+    case '/connection':
+        require '../php/login.php';
+        break;
+    case '/deconnection':
+        require '../php/logout.php';
+        break;
     case '/employes':
         require '../php/employes/view_employes.php';
         break;
@@ -29,28 +42,58 @@ switch ($urlquery) {
         require '../php/employes/evalue_performe.php';
         break;
     case '/dossier_du_personnel':
+        $active_hover = "active_folder";
         require '../php/employes/dossiers_du_personnels.php';
-        break;
-    case '/accueil':
-        require '../index.php';
-        break;
-    case '/':
-        require '../index.php';
-        break;
-    case '/connection':
-        require '../php/login.php';
         break;
     case '/essaie/evaluation':
         require '../essaie/essaie_evaluation.php';
         break;
     case '/tableau/documents'."?".$query:
-        require '../table-02/tableau_documents.php';
+        require '../php/employes/tableau_documents.php';
         break;
-    case '/deconnection':
-        require '../php/logout.php';
+    case '/ajouter/employes':
+        $active_hover = "active_employee";
+        require '../php/employes/form_employee.php';
         break;
-    case '/inscription':
-        require '../php/signup.php';
+    case '/evaluation/result':
+        require '../php/employes/evaluation_result.php';
+        break;
+    case '/sidebar':
+        require '../php/partials/sidebar.php';
+        break;
+    case '/liste/conges':
+        $active_hover = "active_leave";
+        require '../php/employes/liste_demande_conges.php';
+        break;
+    case '/calendrier/conges':
+        require '../php/employes/calendrier.php';
+        break;
+    case '/methode/360':
+        require '../php/employes/methode360.php';
+        break;
+    case '/demande/conges':
+        require '../php/employes/gs_conges.php';
+        break;
+    case '/demande/conges' . "?" . $query:
+        require '../php/employes/gs_conges.php';
+        break;
+    case '/methode/professionnel':
+        require '../php/employes/professionel.php';
+        break;
+    case '/methode/auto_evaluation':
+        require '../php/employes/auto_evaluation.php';
+        break;
+    case '/methodes/evaluations':
+        require '../php/employes/methodes_evaluations.php';
+        break;
+    case '/methode/individuel' . "?" . $query:
+        require '../php/employes/individuel.php';
+        break;
+    case '/details/evaluation' . "?" . $query:
+        require '../php/employes/details_conges.php';
+        break;
+    case '/details/employe' . "?" . $query:
+        require '../php/employes/details_employe.php';
         break;
     case '/request/conges/status':
         require '../php/database/db_conges_status.php';
@@ -94,70 +137,25 @@ switch ($urlquery) {
     case '/request/inscription':
         require '../php/database/signup-auth.php';
         break;
-    case '/ajouter/employes':
-        require '../php/employes/form_employee.php';
-        break;
-    case '/evaluation/result':
-        require '../php/employes/evaluation_result.php';
-        break;
-    case '/sidebar':
-        require '../php/partials/sidebar.php';
-        break;
-    case '/liste/conges':
-        require '../php/employes/liste_demande_conges.php';
-        break;
-    case '/methode/360':
-        require '../php/employes/methode360.php';
-        break;
-    case '/methode/professionnel':
-        require '../php/employes/professionel.php';
-        break;
-    case '/details/employe'."?".$query:
-        require '../php/employes/details_employe.php';
-        break;
-    case '/request/get/pdf'.$query:
-        $fileContents = file_get_contents('/request/get/pdf' . $query);
+    case '/request/get/pdf'. '?' .$query:
+        $fileContents = file_get_contents('../upload/pdf/' . str_replace("file=", "", $query));
         if ($fileContents !== false) {
-            echo $fileContents;
+            $base64Encoded = base64_encode($fileContents);
+            if ($base64Encoded !== false) {
+                echo json_encode(['success'=>true,'base64EncodedFile'=>$base64Encoded]);
+            } else {
+                echo json_encode(['success'=>false,'causes'=>"Impossible de convertir le fichier en base64."]);
+            }
         } else {
-            echo "Impossible de lire le fichier.";
+            echo json_encode(['success'=>false,'causes'=>"Impossible de lire le fichier."]);
         }
-        
-        break;
-    case '/methode/auto_evaluation':
-        require '../php/employes/auto_evaluation.php';
-        break;
-    case '/methodes/evaluations':
-        require '../php/employes/methodes_evaluations.php';
-        break;
-    case '/demande/conges':
-        require '../php/employes/gs_conges.php';
-        break;
-    case '/calendrier/conges':
-        require '../php/employes/calendrier.php';
-        break;
-    case '/methode/individuel'."?".$query:
-        require '../php/employes/individuel.php';
-        break;
-    case '/details/evaluation'."?".$query:
-        require '../php/employes/details_conges.php';
+
         break;
     case '/resquest/get/employe':
         require '../php/database/db-getEmploye.php';
         break;
-    case '/demande/conges'."?".$query:
-        require '../php/employes/gs_conges.php';
-        break;
-
     default:
-        $fileContents = file_get_contents('../upload/pdf/' . str_replace("?file=","",$query));
-        if ($fileContents !== false) {
-            echo $fileContents;
-        } else {
-            echo "Impossible de lire le fichier.";
-        }
-        // require './404.php';
+        require './404.php';
         break;
-
 
 }
