@@ -2,6 +2,7 @@
 export class FetchRequest{
     constructor(uri, data, redirectUrl=null,  postFetchAction=(response)=>{},submiter, preFetchAction=async()=>{}, method = "POST") {
         this.data = data;
+        this._getData = null;
         this._response = null;
         this.uri = uri;
         this.redirectUrl = redirectUrl;
@@ -57,11 +58,15 @@ export class FetchRequest{
                 }
             });
             const dataResponse = await response.json();
+            this._getData = dataResponse.data;
             return this.postFetchAction(dataResponse);
         }catch(error){
             console.error('Erreur lors de l\'envoi du formulaire : ', error);
         }
     };
+    getData(){
+        return this._getData;
+    }
 
     
     getResponse(response) {

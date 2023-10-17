@@ -52,10 +52,66 @@
   width: 220px;
   height: 250px;
   background-color: white;
-  /* position: absolute; */
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   margin: 15px 0;
+  display: none;
+}
+.input_employe{
+  position: relative;
+}
+.employe_container{
+  height: 150px;
+  /* justify-content: center; */
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  width: 150px;
+  position: absolute;
+  background-color: white;
+  top: 50px;
+  left: 30px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 5px 5px 15px 5px;
+}
+.employe_container .employe_parent{
+  width: 100%;
+  height: 30px;
+  border-bottom: solid 1px #DDDDDD;
+  display: flex;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+.employe_container .employe_parent:hover h6{
+  color: white;
+
+}
+.employe_container .employe_parent:hover{
+  background-color: #007bff;
+  
+}
+.employe_container .employe_parent img{
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+
+}
+.employe_container .employe_parent span{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: transparent!important;
+}
+.employe_container .employe_parent span h6{
+  color: black!important;
+  font-size: 12px;
+  margin: 0 10px;
 }
 .tache_frame{
   width: 220px;

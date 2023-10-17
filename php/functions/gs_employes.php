@@ -207,5 +207,40 @@ function getAllEvaluationQuestions(){
     $gAEQ = $result->fetchAll(PDO::FETCH_ASSOC);
     return $gAEQ;
 }
+function getAllTaches(?array $orderBy=null){
+    global $db;
+    $query = "SELECT * FROM `taches`";
+    if($orderBy!==null){
+        $sort = $orderBy['sort'];
+        $order = $orderBy['order']??"ASC";
+        $query = "SELECT * FROM `taches` ORDER BY `$sort` $order";
+    }
+    $result = $db->getFetchResult($query);
+    $taches = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $taches;
+}
+function getTachesBy(string $field ,string $value){
+    global $db;
+    
+    // Utilisation d'une requête préparée pour éviter l'injection SQL
+    $query = "SELECT * FROM `taches` WHERE `$field` = :$field";
+    $connect = $db->getConnection();
+    $stmt = $connect->prepare($query);
+    $stmt->bindParam(":$field", $value, PDO::PARAM_STR);
+    $stmt->execute();
 
+    // Récupérer les données de l'utilisateur sous forme d'un tableau associatif
+    $tache = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $tache;
+}
+function formatDate(string $date, string $format='d/m/Y') {
+    // Utilise strtotime pour convertir la chaîne de caractères en timestamp
+    $timestamp = strtotime($date);
+
+    // Utilise date() pour formater le timestamp en "JJ/MM"
+    $formattedDate = date($format, $timestamp);
+
+    return $formattedDate;
+}
 ?>

@@ -1,68 +1,146 @@
-import anime from "../../anime-master/anime-master/lib/anime.es.js";
 import { FetchRequest } from "../fetch_request.js";
 import { ResolvePath } from "./resolver.js";
-
-function init(){
-    let input = document.querySelector(".inp-methode");
-    if(input){
-        let employe = null;
-        let nextButton = document.querySelector(".icone-btn");
-        let buttoncontainer = document.querySelector(".buttonContainer");
-        let button = null;
-        input.addEventListener("input",function(e){
-            employe= input.value;
-            if(employe!==null && employe!== ""){
-                let html = ` <a href="/methode/individuel?code_employe=${employe}" class="icone-btn entretien-btn">
-                <span>
-                Entretien individuel d'évaluation
-                </span>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 2H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h4l2.29 2.29c.39.39 1.02.39 1.41 0L15 20h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 3.3c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7S9.3 9.49 9.3 8s1.21-2.7 2.7-2.7zM18 16H6v-.9c0-2 4-3.1 6-3.1s6 1.1 6 3.1v.9z"/></svg>
-                </span>
-                </a>`;
-                let div = document.createElement("div");
-                div.innerHTML = html;
-                button = div.firstElementChild;
+import { Popup } from "../module/alert.js";
+function creatTache(){
+    let button = document.querySelector("#aFaire");
+    let formModale = document.querySelector(".modale_form")
+    let form = document.querySelector(".form_modale_form");
+    autoOpen(formModale, button, {dispatch:true});
+    form.addEventListener("submit",function(e){
+        e.preventDefault(e);
+        let formdata = new FormData(form);
+        formdata.append("formtype", "create");
+        new FetchRequest(ResolvePath("request/taches"), formdata, null, function(response){
+            if(true === response.success){
+                let template = frameHtml(response.data);
+                let todo_containers = document.querySelector(".todo_container");
+                todo_containers.insertBefore(template,  formModale.nextElementSibling);
+                formModale.style.display = "none";
+                return handleRequestMessage({title:'Succès !',message:response.message,type:'success'});
             }
-            if(employe===""){
-                let entretienbtn = buttoncontainer.querySelector(".entretien-btn");
-                if(entretienbtn){
-                    anime({
-                        targets:[".entretien-btn",".next-btn"], 
-                        translateX:120, 
-                        easing:"easeInOutExpo",
-                        duration: 30
-                    });
-                }
+            if(false === response.success){
+                return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
             }
         })
-        if(nextButton){
-            nextButton.addEventListener("click",function(e){
-                if(employe!==null && employe!==""){
-                    let formdata = new FormData();
-                    formdata.append("numero_securite_sociale", employe);
-                    formdata.append("form-type","getEmploye")   
-                    let request = new FetchRequest(ResolvePath("request/get/employe/nss"), formdata,null,function(response){
-                        if(response.success){
-                            buttoncontainer.appendChild(button);
-                            let entretienbtn = buttoncontainer.querySelector(".entretien-btn");
-                            if(entretienbtn){
-                                anime({
-                                    targets:[".entretien-btn",".next-btn"], 
-                                    translateX:-120, 
-                                    // easing:"easeInOutExpo"
-                                });
-                            }
 
-                        }
-                        else{
-                            request.getResponse();
-                        }
-                   })
-                }
-            });
+    })
+}
+function frameHtml(data){
+    let frame = `       <div class="tache_frame">
+    <div class="field_container tache_name_frame">
+        <div class="tache_name_child">
+            <span><svg><use xlink:href="../../public/svg/alert.svg#add"></use></svg></span>
+            <h6>${data.tache_a_effectuee}</h6>
+        </div>
+        <div class="select_tache">
+            <span><svg><use xlink:href="../../public/svg/alert.svg#add"></use></svg></span>
+            <select name="" id="">
+                <option value="todo">A faire</option>
+                <option value="pending">En cours</option>
+                <option value="end">Terminé</option>
+                <option value="cancel">Annulé</option>
+            </select>
+        </div>
+    </div>
+    <div class="field_container date_frame">
+        <div class="date_frame_container">
+            <span><svg><use xlink:href="../../public/svg/alert.svg#add"></use></svg></span>
+            <small>${data.date_de_fin}</small>
+        </div>
+        <img src="${data.photo}" class="img_employee" alt="">
+    </div>
+</div>`;
+let div = document.createElement('div');
+div.innerHTML = frame;
+return div.firstElementChild;
+}
+function searchEmploye(){
+    let search = document.querySelector("#nom_employe");
+    let employe_container = document.querySelector(".employe_container");
+    let success = false;
+    let employes = null
+    autoOpen(employe_container, search, {dispatch:true});
+    search.addEventListener("input", async function(){
+        let value = search.value.toLowerCase();
+        if(success==false){
+            employes = await getAllEmploye();
+            success = true;
         }
+        if(employes!==null){
+            for (const key in employes) {
+                if (Object.hasOwnProperty.call(employes, key)){
+                    const employe = employes[key];
+                    let fullname = employe["nom_employe"] + " " + employe["prenom_employe"];
+                    let matching = value.match(fullname.toLowerCase());
+                    // console.log({fullname,matching, value});
+                    if(matching){
+                        let templates = employeHtml(employe);
+                        let existingtemplate = document.querySelector(`div[data-id="${templates.id}"]`)
+                        if(!existingtemplate){
+                            let element = templates.element;
+                            element.addEventListener('click',setEmployeTache)
+                            employe_container.appendChild(element);
+                        }
+                        
+                    }
+                }
+            }
+        }
+    })
+}
+function setEmployeTache(){
+    let id = this.dataset.id;
+    let form = document.querySelector(".form_modale_form");
+    let hiddeninput = form.querySelector("input[type='hidden']");
+    let employe_container = document.querySelector(".employe_container");
+    if(hiddeninput){
+        hiddeninput.value = id;
+        employe_container.style.display = "none";
     }
 }
+function autoOpen(element, button,dispatcher){
+    button.addEventListener("click", function(){
+        element.style.display = "flex";
+    });
+    if( dispatcher.dispatch===true){
+        document.addEventListener("click", function(e){
+            let dispatchelement = dispatcher.dispatchelement ?? element;
+            let target = e.target;
+            if(!button.contains(target) && !dispatchelement.contains(target)){
+                dispatchelement.style.display = "none";
+            }
+        });
+    }
 
-init();
+   
+}
+function employeHtml(data){
+    let template = `<div data-id="${data.id}" class="employe_parent"><img src="${data.photo}" alt=""><span><h6>${data.nom_employe} ${data.prenom_employe}</h6></span></div>`
+    let div = document.createElement("div");
+    div.innerHTML = template;
+    return {element:div.firstElementChild, id:data.id};
+}
+async function getAllEmploye(){
+    let formdata = new FormData();
+    let data = null;
+    formdata.append("id",-1);
+    formdata.append("formtype", "getAll");
+    const request = await fetch(ResolvePath("request/get/employe"),{
+        method: "POST",
+        body: formdata
+    });
+    const response = await request.json();
+    if(response.success){
+        data = response.data;
+    }
+    return data;
+}
+function handleRequestMessage(data={title,message,type}){
+    const modal = new Popup();
+    const flash_modal = document.querySelector("flash-modal");
+    if(flash_modal){flash_modal.remove()}
+    modal.display({title:data.title, type:data.type, message:data.message})
+    modal.handleAudio(5000, {set:true, path:'public/popupsing.wav', volume:0.7});
+}
+searchEmploye();
+creatTache()    

@@ -28,6 +28,11 @@ if(count($messages)<=0){
         echo response("",true, $Employe);
         die;
     }
+    if($formtype == "getAll"){
+        $employes = getAllEmployes();
+        echo response("",true, $employes->fetchAll(PDO::FETCH_ASSOC));
+        die;
+    }
     if($formtype=="edite"){
         $messages = $fe->emptyField([
             "files" => "photo",

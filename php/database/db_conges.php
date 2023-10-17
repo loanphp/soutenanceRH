@@ -4,8 +4,8 @@ require_once "../php/module/connection.php";
 require_once "../php/functions/gs_employes.php";
 $db = new Database();
 $connect = $db->getConnection();
-function response(string $message, bool $success = false) {
-    $response = ["success" => $success, "message" => $message];
+function response(string $message, bool $success = false, array $data = null) {
+    $response = ["success" => $success, "message" => $message, "data" => $data];
     return json_encode($response);
 
 }

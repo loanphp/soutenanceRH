@@ -151,8 +151,12 @@ switch ($urlquery) {
         }
 
         break;
-    case '/resquest/get/employe':
+    case '/request/get/employe':
         require '../php/database/db-getEmploye.php';
+        break;
+        break;
+    case '/request/taches':
+        require '../php/database/db_taches.php';
         break;
     default:
         require './404.php';
