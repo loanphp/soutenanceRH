@@ -24,7 +24,7 @@
 .table_taches{
   width: 100%;
 }
-.table_taches button{
+.table_taches button:not(.appreciation_button){
   border-radius: 3px;
   width: 220px;
   background-color: white;
@@ -36,6 +36,42 @@
   padding: 10px;
   cursor: pointer;
   display: flex;
+}
+.status_container{
+  display: flex;
+  align-items: center;
+}
+.select_tache_appreciation{
+  display: flex;
+  flex-direction: column;
+}
+.appreciation_container{
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+}
+.appreciation_button{
+  width: 50px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: #007bff;
+  display: flex;
+  border-radius: 3px;
+  justify-content: center;
+}
+.appreciation_button svg{
+  width: 25px;
+  height: 25px;
+  color: white;
+}
+.appreciation_input{
+  width: 100%;
+  height: 30px;
+  margin-right: 10px;
+  outline: none;
+  border: solid 1px #DDDDDD;
+  border-radius: 3px;
 }
 .table_taches button svg {
   height: 20px;
@@ -115,7 +151,7 @@
 }
 .tache_frame{
   width: 220px;
-  height: 120px;
+  height: 140px;
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   margin: 15px 0;
@@ -135,7 +171,7 @@ select{
   width: 100%;
 }
 .tache_name_frame{
-  height: 70px;
+  height: 90px;
   display: flex;
   flex-direction: column;
 }
@@ -186,7 +222,6 @@ select{
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .field_container span {
@@ -197,7 +232,7 @@ select{
   vertical-align: middle;
 }
 
-.field_container input {
+.field_container input:not(.appreciation_input) {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;

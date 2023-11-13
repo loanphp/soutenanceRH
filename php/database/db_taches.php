@@ -8,7 +8,6 @@ $connect = $db->getConnection();
 function response(string $message, bool $success = false, array $data = null) {
     $response = ["success" => $success, "message" => $message, "data" => $data];
     return json_encode($response);
-
 }
 $fe = new FormException();
 $messages = $fe->emptyField([
@@ -34,6 +33,34 @@ if(count($messages)<=0){
             ":_numero_securite_sociale" => $numero_securite_sociale
         ]);
         echo response("Les dossiers de l'employé on été mis à jour.", true);
+        die;
+    }
+    if($form_type=="change_status"){
+        $status =  strip_tags(trim($_POST["status"]));
+        $id =  strip_tags(trim($_POST["id"]));
+        $employe_id =  strip_tags(trim($_POST["employe_id"]));
+        $update = "UPDATE `taches` SET `status` = :statut WHERE id = :id";
+        $result = $db->getSelect($update, [
+            ":statut" => $status,
+            ":id" => $id
+        ]);
+        $tache = getTachesBy("id", $id);
+        $employe = getEmployeBy("id", $employe_id);
+        $photo = $employe['photo'];
+        $tache['photo'] = $photo;
+        echo response("Le status a bien été changé avec succès.", true,$tache);
+        die;
+    }
+    if($form_type=="addappreciation"){
+        $appreciation =  strip_tags(trim($_POST["appreciation"]));
+        $id =  strip_tags(trim($_POST["id"]));
+        $employe_id =  strip_tags(trim($_POST["employe_id"]));
+        $update = "UPDATE `taches` SET `appreciation` = :appreciation WHERE id = :id";
+        $result = $db->getSelect($update, [
+            ":appreciation" => $appreciation,
+            ":id" => $id
+        ]);
+        echo response("Nouvelle appréciation ajouter avec succès.", true);
         die;
     }
     if($form_type === "create"){

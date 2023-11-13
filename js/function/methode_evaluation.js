@@ -25,21 +25,31 @@ function creatTache(){
 
     })
 }
-function frameHtml(data){
-    let frame = `       <div class="tache_frame">
+function frameHtml(data, appreciation=false){
+    let appreciationhtml = appreciation?`<div class="appreciation_container">
+                                            <input type="text" placeholder="appréciation en pourcentage" value=" ${data["appreciation"]?data["appreciation"]:"" }" name="appreciation" placeholder="appréciation en pourcentage" class="appreciation_input">
+                                            <button type="button" data-id="${data["id"]}" class="appreciation_button"><svg>
+                                            <use xlink:href="../../public/svg/alert.svg#send"></use>
+                                                </svg></button>
+                                        </div>`: "";
+    let frame = `       <div class="tache_frame" data-employe-id = "${data["employe_id"]}">
     <div class="field_container tache_name_frame">
         <div class="tache_name_child">
             <span><svg><use xlink:href="../../public/svg/alert.svg#add"></use></svg></span>
             <h6>${data.tache_a_effectuee}</h6>
         </div>
-        <div class="select_tache">
-            <span><svg><use xlink:href="../../public/svg/alert.svg#add"></use></svg></span>
-            <select name="" id="">
-                <option value="todo">A faire</option>
-                <option value="pending">En cours</option>
-                <option value="end">Terminé</option>
-                <option value="cancel">Annulé</option>
-            </select>
+        <div class="select_tache select_tache_appreciation">
+            <div class="status_container">
+                <span><svg><use xlink:href="../../public/svg/alert.svg#add"></use></svg></span>
+                <select id="" data-id = "${data.id}" class="select_status" name="status">
+                    <option value="todo">A faire</option>
+                    <option value="pending">En cours</option>
+                    <option value="end">Terminé</option>
+                    <option value="cancel">Annulé</option>
+                
+                </select>
+            </div>
+            ${appreciationhtml}
         </div>
     </div>
     <div class="field_container date_frame">
@@ -72,7 +82,6 @@ function searchEmploye(){
                     const employe = employes[key];
                     let fullname = employe["nom_employe"] + " " + employe["prenom_employe"];
                     let matching = value.match(fullname.toLowerCase());
-                    // console.log({fullname,matching, value});
                     if(matching){
                         let templates = employeHtml(employe);
                         let existingtemplate = document.querySelector(`div[data-id="${templates.id}"]`)
@@ -135,6 +144,86 @@ async function getAllEmploye(){
     }
     return data;
 }
+function repushChangeEvent(element){
+    let select = element.querySelector("select");
+    pushChangeEvent(select);
+}
+function pushChangeEvent(element){
+    element.addEventListener("change",function(){
+        let id = element.dataset.id;
+        let lasttacheframe = element.closest(".tache_frame");
+        let employe_id = lasttacheframe.dataset.employeId;
+        let formdata = new FormData();
+        formdata.append("employe_id",employe_id);
+        formdata.append("status",element.value);
+        formdata.append("id",id);
+        formdata.append("formtype", "change_status");
+        formdata.append("date_de_fin","-1");
+        formdata.append("tache_a_effectuee", "-1");
+        new FetchRequest(ResolvePath("request/taches"), formdata,null,function(response){
+            if(true === response.success){
+                let data = response.data;
+                let status = data.status;
+                let newtacheframe =  document.querySelector(`td[data-status="${status}"]`);
+                lasttacheframe.remove();
+                let template = frameHtml(data);
+                if(data.status=="end" || data.status=="cancel"){
+                    template = frameHtml(data, true);
+                    repushAppreciationEvent(template);
+
+                }
+                repushChangeEvent(template);
+                template.addEventListener('change', changeStatus);
+                newtacheframe.insertBefore(template, newtacheframe.firstElementChild);
+                return handleRequestMessage({title:'Succès !',message:response.message,type:'success'});
+            }
+            if(false === response.success){
+                return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
+            }
+        })
+    });
+};
+function changeStatus(){
+    let selectStatus = document.querySelectorAll(".select_status");
+    if(selectStatus){
+        selectStatus.forEach(element => {
+            pushChangeEvent(element);
+                      
+        });
+    }
+}
+function pushAppreciationEvent(element){
+    element.addEventListener("click",function(e) {
+        let id = element.dataset.id;
+        let input = element.previousElementSibling;
+        let appreciation = input.value;
+        let formdata = new FormData();
+        formdata.append("id",id);
+        formdata.append("employe_id", "-1");
+        formdata.append("appreciation",appreciation);
+        formdata.append("formtype", "addappreciation" );
+        formdata.append("date_de_fin","-1");
+        formdata.append("tache_a_effectuee", "-1");
+        new FetchRequest(ResolvePath("request/taches"), formdata, null, function(response){
+            if(true === response.success){
+                return handleRequestMessage({title:'Succès !',message:response.message,type:'success'});
+            }
+            if(false === response.success){
+                return handleRequestMessage({title:'Erreur !',message:response.message,type:'danger'});
+            }
+        })
+    });
+}
+function addAppreciation(){
+    let appreciation_buttons =document.querySelectorAll(".appreciation_button");
+    appreciation_buttons.forEach(element => {
+        pushAppreciationEvent(element);     
+    });
+}
+function repushAppreciationEvent(element){
+    let button = element.querySelector("button");
+    pushAppreciationEvent(button);
+}
 function handleRequestMessage(data={title,message,type}){
     const modal = new Popup();
     const flash_modal = document.querySelector("flash-modal");
@@ -142,5 +231,7 @@ function handleRequestMessage(data={title,message,type}){
     modal.display({title:data.title, type:data.type, message:data.message})
     modal.handleAudio(5000, {set:true, path:'public/popupsing.wav', volume:0.7});
 }
+addAppreciation()
+changeStatus();
 searchEmploye();
-creatTache()    
+creatTache();  
